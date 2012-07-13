@@ -1,0 +1,262 @@
+/*         _____________   ____________  ___    __ 
+          / ____/ ____/ | / / ____/ __ \/   |  / / 
+         / / __/ __/ /  |/ / __/ / /_/ / /| | / /  
+        / /_/ / /___/ /|  / /___/ _, _/ ___ |/ /___
+        \____/_____/_/ |_/_____/_/ |_/_/  |_/_____/                                      
+*/
+
+.main_header {
+    font-size:44px;
+    text-align:center;
+    width:960px;
+}
+.header_links {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+    width: 960px;
+    background: #222;
+    font-size: 1.2em;
+    background-color: #000;
+}
+.header_links li {
+    margin: 0 12px;  
+    padding: 0 15px 0 0;
+    position: relative; /*--Declare X and Y axis base for sub navigation--*/
+}
+.header_links li a {
+    padding: 10px 5px;
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    float: left;
+}
+.header_links li span {
+    padding: 10px 5px;
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    float:right;
+}
+.header_links li a:hover{
+    background-color: #444444;
+}
+.header_links li ul.subnav {
+    list-style: none;
+    position: absolute;
+    left: 0; top: 35px;
+    background: #333;
+    margin: 0; padding: 0;
+    display: none;
+    float: left;
+    width: 170px;
+    border: 1px solid #111;
+    z-index: 99;
+}
+.header_links li ul.subnav li{
+    margin: 0; padding: 0;
+    border-top: 1px solid #252525;
+    border-bottom: 1px solid #444;
+    clear: both;
+    width: 170px;
+}
+.header_links li ul.subnav li a {
+    float: left;
+    width: 145px;
+    background: #000000;
+    padding-left: 20px;
+}
+.header_links li ul.subnav li a:hover {
+    background-color: #444444;
+}
+.clear {
+    clear:both;
+}
+.float_left {
+    float:left;
+}
+.float_right {
+    float:right;
+}
+.crime_font {
+    font-family: CrimeFont, Arial, Verdana, sans-serif;
+}
+.border_white {
+    border:1px solid #fff !important;
+}
+.border_reg {
+    border:1px solid #000 !important;   
+}
+
+/*          __  ______    _____   __
+           /  |/  /   |  /  _/ | / /
+          / /|_/ / /| |  / //  |/ / 
+         / /  / / ___ |_/ // /|  /  
+        /_/  /_/_/  |_/___/_/ |_/                                     
+*/
+.folder_top {
+    margin-top:10px;
+    margin-left:5px;
+    margin-bottom:0.5px;
+    font-size: 110%;
+    padding:10px;
+    height:auto;
+    background-color:#FFE4C2;
+    border:thin solid #CCC;
+    -moz-border-radius-topright:10px;
+    border-top-right-radius:10px;
+    -moz-border-radius-topleft:10px;
+    border-top-left-radius:10px;
+    -moz-box-shadow:    10px 0px 5px -2px #888;
+    -webkit-box-shadow: 10px 0px 5px -2px #888;
+    box-shadow:         10px 0px 5px -2px #888;
+    float:right;
+}
+.incident {
+    margin:0 0 12px 0;
+    padding:5px;
+    min-height: 250px;
+    background-color:#FFE4C2;
+    border:thin solid #CCC;
+    -moz-border-radius-topleft:10px;
+    border-top-left-radius:10px;
+    -moz-box-shadow: 3px 3px 5px 6px #888;
+    -webkit-box-shadow: 3px 3px 5px 6px #888;
+    box-shadow: 3px 3px 5px 6px #888;
+    clear: both;
+}
+.incident_header {
+    font-size:20pt !important;
+    margin: 3px;
+    text-align:center;
+}
+.incident .summary, .incident .details {
+    width:45%;
+    padding: 5px;
+}
+/*          __  ______    ____ 
+           /  |/  /   |  / __ \
+          / /|_/ / /| | / /_/ /
+         / /  / / ___ |/ ____/ 
+        /_/  /_/_/  |_/_/                                   
+*/
+.map {
+    margin-top: 10px;
+    height:500px;
+    width:960px;
+    border:thin solid black;
+}
+
+/*          _____   ________________  _______   ________   ____  ___   ____________
+           /  _/ | / / ____/  _/ __ \/ ____/ | / /_  __/  / __ \/   | / ____/ ____/
+           / //  |/ / /    / // / / / __/ /  |/ / / /    / /_/ / /| |/ / __/ __/   
+         _/ // /|  / /____/ // /_/ / /___/ /|  / / /    / ____/ ___ / /_/ / /___   
+        /___/_/ |_/\____/___/_____/_____/_/ |_/ /_/    /_/   /_/  |_\____/_____/                                                                                    
+*/
+.manilla {
+    background-color:#FFE4C2;
+    padding: 15px 25px;
+    margin: 20px 0 10px 0;
+}
+.paper {
+    background-color:#fff;
+    padding:10px 20px;
+    min-height:500px;
+}
+.victims {
+    background-color: #DEDEDE;
+    margin-right: 3px;
+    min-height: 100px;
+    padding: 5px;
+    width: 50%;
+}
+.inc_summary p {
+    font-size: 12pt !important;
+    line-height: 19pt !important;
+}
+.suspects {
+    background-color: #DEDEDE;
+    margin-left: 3px;
+    min-height: 100px;
+    padding: 5px;
+    width: 45%;
+}
+.incidentPhoto {
+    margin: 0 3px 3px 0;
+    max-height: 100px;
+}
+.incidentMap {
+    background-color: #000000;
+    border: thin solid #000000;
+    height: 250px;
+    margin: 0 6px 9px 10px;
+    padding: 5px;
+    width: 288px;
+}
+.subhead {
+    color:#000 !important;
+    margin:5px;
+}
+.time_place {
+    margin-bottom: 5px;
+    line-height: 12pt;
+}
+.time_place strong {
+    font-size:11pt;
+}
+/*
+            ____  __________  ____  __    ______   ____  ___   _________________
+           / __ \/ ____/ __ \/ __ \/ /   / ____/  / __ \/   | / ____/ ____/ ___/
+          / /_/ / __/ / / / / /_/ / /   / __/    / /_/ / /| |/ / __/ __/  \__ \ 
+         / ____/ /___/ /_/ / ____/ /___/ /___   / ____/ ___ / /_/ / /___ ___/ / 
+        /_/   /_____/\____/_/   /_____/_____/  /_/   /_/  |_\____/_____//____/  
+                                                                            
+*/
+.person{
+    width:200px;
+    height:200px;
+    float:left;
+    margin:4px;
+    /* Giving the sponsor div a relative positioning: */
+    position:relative;
+    cursor:pointer;
+    background-color:#000;
+    color:#fff;
+}
+
+.personFlip{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    border:1px solid #ddd;
+}
+.personFlip:hover{
+    border:1px solid #999;
+    -moz-box-shadow:0 0 30px #CCC inset;
+    -webkit-box-shadow:0 0 30px #CCC inset;
+    box-shadow:0 0 30px #CCC inset;
+}
+.personFlip .name {
+    margin:70px 10px 10px 10px;
+    font-size:18pt;
+    text-align:center;
+}
+.personPhoto {
+    max-height:170px;
+    margin:15px 30px;
+}
+.personData{
+    display:none;
+}
+.personDescription{
+    font-size:14px;
+    padding:10px;
+    color:#000;
+}
+.incidentURL{
+    font-size:10px;
+    font-weight:bold;
+    padding-left:20px;
+}

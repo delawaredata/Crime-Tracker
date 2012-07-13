@@ -1,0 +1,116 @@
+{% if details %}
+        {% if pagination %}         
+            {% for incident, victims, suspects in details.object_list %}
+                <div class="folder_top crime_font">{{ incident.inc_date }} | {% if incident.is_homicide %}HOMICIDE{% else %}SHOOTING{% endif %}</div>
+                <div class="incident">
+                    <h2 class="crime_font incident_header">
+                        <a href="/crime/{{ incident.id }}/{{ incident.inc_slug }}">{{ incident.headline }}</a>
+                    </h2>
+                    <div class="summary float_left">
+                        <p>
+                            <strong>Incident summary:</strong>
+                            <br />
+                            {{ incident.summary }}
+                        </p>
+                    </div>
+                    <div class="details float_left">
+                        <p>
+                            <strong>Location:</strong>
+                            <br />In the area of {{incident.formatted_address}}
+                        </p>
+                        <p>
+                            <strong>Victims:</strong>
+                            <br />
+                            {% if incident.is_victims_unknown %}
+                                Victim(s) have not been identifed.    
+                            {% else %}
+                                {% for victim in victims %}
+                                    {{ victim.get_full_name }}, {{ victim.age }} {% if victim.is_killed %}(killed){% endif %}{% if forloop.last %} {% else %}<br />{% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </p>
+                        <p>
+                            <strong>Suspects:</strong>
+                            <br />
+                            {% if incident.is_suspects_unknown %}
+                                Suspect(s) have not been identifed.
+                            {% else %}
+                                {% for suspect in suspects %}
+                                    {{ suspect.get_full_name }}, {{ suspect.age }}{% if suspect.arrest_date %}, arrested on {{ suspect.arrest_date }}{% endif %}{% if forloop.last %} {% else %}<br />{% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </p>        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            {% endfor %}
+            <center>
+                <div class="pagination">
+                    <span class="step-links">
+                        
+                        {% if details.has_previous %}
+                            <a href="?page={{ details.previous_page_number }}">previous</a> <<
+                        {% endif %}
+
+                        <span class="current">
+                            {{ details.number }} of {{ details.paginator.num_pages }}
+                        </span>
+
+                        {% if details.has_next %}
+                            >> <a href="?page={{ details.next_page_number }}">next</a>
+                        {% endif %}
+
+                    </span>
+                </div>
+            </center>
+        {% else %}
+            {% for incident, victims, suspects in details %}
+                <div class="folder_top crime_font">{{ incident.inc_date }} | {% if incident.is_homicide %}HOMICIDE{% else %}SHOOTING{% endif %}</div>
+                <div class="incident">
+                    <h2 class="crime_font incident_header">
+                        <a href="/crime/{{ incident.id }}/{{ incident.inc_slug }}">{{ incident.headline }}</a>
+                    </h2>
+                    <div class="summary float_left">
+                        <p>
+                            <strong>Incident summary:</strong>
+                            <br />
+                            {{ incident.summary }}
+                        </p>
+                    </div>
+                    <div class="details float_left">
+                        <p>
+                            <strong>Location:</strong>
+                            <br />In the area of {{incident.formatted_address}}
+                        </p>
+                        <p>
+                            <strong>Victims:</strong>
+                            <br />
+                            {% if incident.is_victims_unknown %}
+                                Victim(s) have not been identifed.    
+                            {% else %}
+                                {% for victim in victims %}
+                                    {{ victim.get_full_name }}, {{ victim.age }} {% if victim.is_killed %}(killed){% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </p>
+                        <p>
+                            <strong>Suspects:</strong>
+                            <br />
+                            {% if incident.is_suspects_unknown %}
+                                Suspect(s) have not been identifed.
+                            {% else %}
+                                <ul>
+                                    {% for suspect in suspects %}
+                                        <li>{{ suspect.get_full_name }}, {{ suspect.age }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </p>        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            {% endfor %}
+        {% endif %}
+{% else %}
+    <h3>No results.</h3>
+{% endif %}
