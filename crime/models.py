@@ -43,7 +43,7 @@ class Incident(models.Model):
     killed_count = models.IntegerField('No. of Killed', max_length=12, blank=True, null=True, default="0")
     is_victims_unknown = models.BooleanField('Victims not identified')
     summary = models.TextField('Incident Summary', blank=True, help_text="Give just the details. Try to keep it under 5 grafs.")
-    suspect_count = models.IntegerField('No. of Arrests', max_length=12, blank=True, null=True)
+    suspect_count = models.IntegerField('No. of Arrests', max_length=12, blank=True, null=True, default=0)
     is_suspects_unknown = models.BooleanField('Suspects not identified')
     suspects = models.ManyToManyField('Suspect', null=True, blank=True)
     victims = models.ManyToManyField('Victim', blank=True, null=True)

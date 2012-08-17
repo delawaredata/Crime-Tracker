@@ -142,9 +142,30 @@
 */
 .map {
     margin-top: 10px;
-    height:500px;
+    height:600px;
     width:960px;
     border:thin solid black;
+}
+.map_buttons {
+    position: relative;
+    z-index: 99;
+    width: 80px;
+    left: 850px;
+    top: -587px;
+    height: auto;
+}
+#userLocation, #wilmingtonLocation {
+    background-color: #000000;
+    color: #fff;
+    margin-bottom: 3px;
+    padding: 1px;
+    height: 23px;
+    width: 102px;
+    vertical-align: middle;
+    float: left;
+}
+#userLocation:hover, #wilmingtonLocation:hover {
+    background-color: #444444;
 }
 
 /*          _____   ________________  _______   ________   ____  ___   ____________
