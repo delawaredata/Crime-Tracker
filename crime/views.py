@@ -22,15 +22,15 @@ def _getAggregateInfo():
     including success rates and average ages.
     """
     homicide_count = Incident.objects.filter(is_homicide=True).count()
-    homicide_arrest_count = Incident.objects.filter(is_homicide=True, suspect_count__gte=1).count()
+    homicide_arrest_count = Incident.objects.filter(is_homicide=True, is_suspects_unknown=False).count()
     homicide_success_rate = homicide_arrest_count * 100.00 / homicide_count
     # Success rate for non-homicides
     shooting_count = Incident.objects.filter(is_homicide=False).count()
-    shooting_arrest_count = Incident.objects.filter(is_homicide=True, suspect_count__gte=1).count()
+    shooting_arrest_count = Incident.objects.filter(is_homicide=False, is_suspects_unknown=False).count()
     shooting_success_rate = shooting_arrest_count * 100.00 / shooting_count
     # Success rate for all incidents
     total_count = Incident.objects.all().count()
-    tot_arrest_count = Incident.objects.filter(suspect_count__gte=1).count()
+    tot_arrest_count = Incident.objects.filter(is_suspects_unknown=False).count()
     tot_success_rate = tot_arrest_count * 100.00 / total_count
 
     agg_info = {
@@ -95,7 +95,7 @@ def index(request, map=False):
     # CHECK FOR MAP, APPLY
     if not map:  # For the normal main page.
         pagination = True
-        paginator = Paginator(incidents, 5)
+        paginator = Paginator(incidents, 10)
         try:
             page = int(request.GET.get('page', '1'))
         except ValueError:
@@ -109,6 +109,7 @@ def index(request, map=False):
             'details': details,
             'agg_info': agg_info,
             'since_date': since_date,
+            'time_frame': time_frame,
             'pagination': pagination
         })
         return render_to_response('crime/index.html', variables)
@@ -117,6 +118,7 @@ def index(request, map=False):
         variables = RequestContext(request, {
             'details': incidents,
             'since_date': since_date,
+            'time_frame': time_frame,
             'pagination': pagination
         })
         return render_to_response('crime/map.html', variables)
@@ -132,21 +134,21 @@ def victims_page(request):
         time_frame = 'all'
 
     if time_frame == 'all':
-        incidents = Incident.objects.all().order_by('-inc_date')
+        incidents = Incident.objects.all().order_by('-inc_date', '-inc_time')
     elif time_frame == 'week':
         since_date = today - datetime.timedelta(weeks=1)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     elif time_frame == 'one_month':
         since_date = _monthdelta(today, -1)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     elif time_frame == 'six_months':
         since_date = _monthdelta(today, -6)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     elif time_frame == 'year':
         since_date = today.replace(year=today.year - 1)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     else:
-        incidents = Incident.objects.all().order_by('-inc_date')
+        incidents = Incident.objects.all().order_by('-inc_date', '-inc_time')
 
     victims_details = []
     for incident in incidents:
@@ -157,7 +159,7 @@ def victims_page(request):
             else:
                 victims_details.append(victim)
 
-    paginator = Paginator(victims_details, 12)
+    paginator = Paginator(victims_details, 15)
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -172,6 +174,7 @@ def victims_page(request):
     variables = RequestContext(request, {
         'details': details,
         'agg_info': agg_info,
+        'time_frame': time_frame,
         'since_date': since_date
     })
     return render_to_response('crime/victims.html', variables)
@@ -187,21 +190,21 @@ def suspects_page(request):
         time_frame = 'all'
 
     if time_frame == 'all':
-        incidents = Incident.objects.all().order_by('-inc_date')
+        incidents = Incident.objects.all().order_by('-inc_date', '-inc_time')
     elif time_frame == 'week':
         since_date = today - datetime.timedelta(weeks=1)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     elif time_frame == 'one_month':
         since_date = _monthdelta(today, -1)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     elif time_frame == 'six_months':
         since_date = _monthdelta(today, -6)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     elif time_frame == 'year':
         since_date = today.replace(year=today.year - 1)
-        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date')
+        incidents = Incident.objects.filter(inc_date__gte=since_date).order_by('-inc_date', '-inc_time')
     else:
-        incidents = Incident.objects.all().order_by('-inc_date')
+        incidents = Incident.objects.all().order_by('-inc_date', '-inc_time')
 
     suspect_details = []
     for incident in incidents:
@@ -212,7 +215,7 @@ def suspects_page(request):
             else:
                 suspect_details.append(suspect)
 
-    paginator = Paginator(suspect_details, 12)
+    paginator = Paginator(suspect_details, 15)
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -227,6 +230,7 @@ def suspects_page(request):
     variables = RequestContext(request, {
         'details': details,
         'agg_info': agg_info,
+        'time_frame': time_frame,
         'since_date': since_date
     })
     return render_to_response('crime/suspects.html', variables)
@@ -267,7 +271,7 @@ def search_page(request):
 
             incidents = Incident.objects.filter(
                 Q(headline__icontains=query) | Q(summary__icontains=query)
-                ).order_by('-inc_date')
+                ).order_by('-inc_date', '-inc_time')
 
             variables = RequestContext(request, {
                 'form': form,

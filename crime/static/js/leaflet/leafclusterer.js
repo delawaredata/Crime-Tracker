@@ -81,8 +81,8 @@ function LeafClusterer(map, opt_markers, opt_opts) {
   var map_ = map;
   var maxZoom_ = null;
   var me_ = this;
-  var gridSize_ = 40;
-  var sizes = [53, 56, 66, 78, 90];
+  var gridSize_ = 50;
+  var sizes = [53, 56, 66, 78, 90]; // size of markers in pixels.
   var styles_ = [];
   var leftMarkers_ = [];
   var mcfn_ = null;
@@ -603,10 +603,20 @@ ClusterMarker_ = L.Class.extend({
       this.count_ = opts.count;
 
       var index = 0;
-      var dv = this.count_;
+      var dv = parseInt(this.count_);
+/*
       while (dv !== 0) {
-          dv = parseInt(dv / 10, 10);
+          dv = parseInt(dv / 3, 10);
           index ++;
+      }
+*/
+      // TWEAK THIS TO CHANGE THE STYLE FOR EACH NUMBER
+      if (dv > 10){
+        index = 2; // RED
+      } else if (dv <= 10 && dv > 5) {
+        index = 1; // YELLOW
+      } else {
+        index = 0; // BLUE
       }
 
       var styles = this.styles_;
@@ -614,11 +624,11 @@ ClusterMarker_ = L.Class.extend({
       if (styles.length < index) {
           index = styles.length;
       }
-      this.url_ = styles[index - 1].url;
-      this.height_ = styles[index - 1].height;
-      this.width_ = styles[index - 1].width;
-      this.textColor_ = styles[index - 1].opt_textColor;
-      this.anchor_ = styles[index - 1].opt_anchor;
+      this.url_ = styles[index].url;
+      this.height_ = styles[index].height;
+      this.width_ = styles[index].width;
+      this.textColor_ = styles[index].opt_textColor;
+      this.anchor_ = styles[index].opt_anchor;
       this.index_ = index;
     }
 

@@ -21,6 +21,25 @@ STATE_CHOICES = (
     ('NJ', 'New Jersey'),
     ('MD', 'Maryland'),
 )
+WOUND_CHOICES = (
+    ('AB', 'Abdomen'),
+    ('AN', 'Ankle'),
+    ('AR', 'Arm'),
+    ('BA', 'Back'),
+    ('BU', 'Buttocks'),
+    ('CH', 'Chest'),
+    ('FO', 'Foot'),
+    ('GR', 'Groin'),
+    ('HA', 'Hand'),
+    ('HE', 'Head'),
+    ('KN', 'Knee'),
+    ('LE', 'Leg'),
+    ('NE', 'Neck'),
+    ('TS', 'Torso'),
+    ('SH', 'Shoulder'),
+    ('MU', 'Multiple'),
+    ('NS', 'Not specified'),
+)
 
 
 class Incident(models.Model):
@@ -62,6 +81,9 @@ class Incident(models.Model):
             self.latitude, self.longitude, self.formatted_address = get_lat_lng(location)
         super(Incident, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return "/webapps/crime/%s/%s" % (str(self.id), self.inc_slug)
+
 
 def uploadVicPhoto(instance, filename):
     """
@@ -80,6 +102,7 @@ class Victim(models.Model):
     age = models.IntegerField('Age', max_length=3, blank=True, null=True)
     sex = models.CharField('Sex', max_length=1, choices=SEX_CHOICES)
     is_killed = models.BooleanField('This person was killed')
+    wound_location = models.CharField('Wound location', max_length=2, choices=WOUND_CHOICES)
     is_unidentified = models.BooleanField('Unidentified')
     victim_photo = ImageCropField('Victim Photo', upload_to=uploadVicPhoto, null=True, blank=True)
     cropping = ImageRatioField('victim_photo', '300x400')

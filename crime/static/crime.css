@@ -94,46 +94,40 @@
          / /  / / ___ |_/ // /|  /  
         /_/  /_/_/  |_/___/_/ |_/                                     
 */
-.folder_top {
-    margin-top:10px;
-    margin-left:5px;
-    margin-bottom:0.5px;
-    font-size: 110%;
-    padding:10px;
-    height:auto;
-    background-color:#FFE4C2;
-    border:thin solid #CCC;
-    -moz-border-radius-topright:10px;
-    border-top-right-radius:10px;
-    -moz-border-radius-topleft:10px;
-    border-top-left-radius:10px;
-    -moz-box-shadow:    10px 0px 5px -2px #888;
-    -webkit-box-shadow: 10px 0px 5px -2px #888;
-    box-shadow:         10px 0px 5px -2px #888;
-    float:right;
-}
 .incident {
-    margin:0 0 12px 0;
-    padding:5px;
-    min-height: 250px;
-    background-color:#FFE4C2;
-    border:thin solid #CCC;
-    -moz-border-radius-topleft:10px;
-    border-top-left-radius:10px;
-    -moz-box-shadow: 3px 3px 5px 6px #888;
-    -webkit-box-shadow: 3px 3px 5px 6px #888;
-    box-shadow: 3px 3px 5px 6px #888;
+    margin:0 0 30px;
+    padding:5px 10px;
+    -moz-box-shadow: 0px 2px 2px 2px #888;
+    -webkit-box-shadow: 0px 2px 2px 2px #888;
+    box-shadow: 0px 2px 2px 2px #888;
     clear: both;
 }
 .incident_header {
-    font-size:20pt !important;
-    margin: 3px;
-    text-align:center;
+    font-size:24pt !important;
+    margin: 3px 0;
 }
-.incident .summary, .incident .details {
-    width:45%;
-    padding: 5px;
+.incident .datetime {
+    margin: -3px 0 5px 0;
 }
+.incident .summary {
+    font-size: 12pt !important;
+    line-height: 15pt !important;
+}
+.people_table {
+    padding-right:10px;
+    margin-bottom:5px;
+}
+.people_table td {
+    font-size: 10pt !important;
+    padding:3px;
+    width: 285px;
+    vertical-align: top;
+}
+.wall_left {
+    border-left: 1px solid #ccc;
+    padding-left: 10px !important;
+}
+
 /*          __  ______    ____ 
            /  |/  /   |  / __ \
           / /|_/ / /| | / /_/ /
@@ -149,23 +143,16 @@
 .map_buttons {
     position: relative;
     z-index: 99;
-    width: 80px;
+    width: auto;
     left: 850px;
     top: -587px;
     height: auto;
 }
 #userLocation, #wilmingtonLocation {
-    background-color: #000000;
-    color: #fff;
     margin-bottom: 3px;
-    padding: 1px;
-    height: 23px;
-    width: 102px;
+    height: auto;
+    width: 100px;
     vertical-align: middle;
-    float: left;
-}
-#userLocation:hover, #wilmingtonLocation:hover {
-    background-color: #444444;
 }
 
 /*          _____   ________________  _______   ________   ____  ___   ____________
@@ -204,7 +191,7 @@
 }
 .incidentPhoto {
     margin: 0 3px 3px 0;
-    max-height: 100px;
+    max-height: 165px;
 }
 .incidentMap {
     background-color: #000000;
@@ -265,8 +252,10 @@
     text-align:center;
 }
 .personPhoto {
-    max-height:170px;
-    margin:15px 30px;
+    border: thin solid #D4D4D4 !important;
+    height: 170px;
+    margin: 13px 30px;
+    width: auto;
 }
 .personData{
     display:none;
